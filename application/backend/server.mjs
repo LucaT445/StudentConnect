@@ -16,7 +16,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
 
-dotenv.config({ path: "../.env" });
+dotenv.config();
+
 
 app.use(cors());
 app.use(bodyParser.json());

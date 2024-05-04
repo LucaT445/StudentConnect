@@ -1,20 +1,24 @@
 import mongoose from "mongoose";
 import User from "./models/User.mjs";
 
-// Connect to database
-export async function connectToDatabase(env_DB_URI) {
+// Connect to the database
+export async function connectToDatabase() {
   try {
-    await mongoose.connect(process.env.URI, {});
+    // Make sure to use the correct environment variable name that matches your .env file
+    const dbUri = process.env.DB_URI;
+    await mongoose.connect(dbUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
     console.log("Connected to Database");
   } catch (err) {
-    console.log(err);
+    console.error("Database connection error:", err);
   }
 }
 
-// insert users into database using array populated from login form
+// Insert users into the database using array populated from the login form
 export async function insertUsers(usersData) {
-  await connectToDatabase();
-
+  // Consider connecting to the database only once at the application start-up, not every time you insert users
   for (const userData of usersData) {
     const newUser = new User({
       username: userData.username,
@@ -40,3 +44,4 @@ export async function insertUsers(usersData) {
     }
   }
 }
+
