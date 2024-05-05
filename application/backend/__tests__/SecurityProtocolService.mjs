@@ -1,4 +1,4 @@
-// SecurityProtocolService.mjs
+
 import SecurityProtocol from '../models/SecurityProtocol.mjs';
 
 export const logEvent = async (eventData) => {

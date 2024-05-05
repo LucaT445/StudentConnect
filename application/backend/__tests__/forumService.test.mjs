@@ -17,7 +17,7 @@ jest.mock('../database.mjs', () => {
 
 describe('Forum Service Tests', () => {
     beforeEach(() => {
-        // Clear previous mocking info before each test
+        
         jest.clearAllMocks();
 
         // Setup default resolved values for each mock function

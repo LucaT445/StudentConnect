@@ -1,4 +1,4 @@
-// classService.mjs
+
 import { database } from '../database.mjs';
 
 export const enrollStudent = async (classId, studentId) => {

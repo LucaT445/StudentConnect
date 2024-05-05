@@ -1,4 +1,4 @@
-// Assuming you have a function 'authenticate' in 'authService.mjs'
+
 const authService = require('./authService');
 
 const users = [

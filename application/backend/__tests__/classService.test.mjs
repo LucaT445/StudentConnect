@@ -1,8 +1,8 @@
-// classService.test.mjs
+
 import { enrollStudent, removeStudent, listStudents } from './classService.mjs';
 import { database } from '../database.mjs';
 
-jest.mock('../database.mjs');  // Mock the database module
+jest.mock('../database.mjs');  
 
 describe('Class Enrollment Service Tests', () => {
     beforeEach(() => {

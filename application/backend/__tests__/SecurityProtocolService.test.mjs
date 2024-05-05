@@ -1,4 +1,4 @@
-// SecurityProtocolService.test.mjs
+
 import { logEvent, getEventById, getAllEvents, deleteEvent } from './SecurityProtocolService.mjs';
 import SecurityProtocol from '../models/SecurityProtocol.mjs';
 

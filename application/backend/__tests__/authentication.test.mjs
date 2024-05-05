@@ -1,4 +1,3 @@
-// Using ES module syntax
 import { authenticate } from './authService.mjs';
 
 describe('Authentication Unit Tests', () => {
@@ -15,7 +14,7 @@ describe('Authentication Unit Tests', () => {
     const username = 'testuser';
     const password = 'wrongpass';
 
-    // Direct call to authenticate
+ 
     const result = await authenticate(username, password);
     expect(result).toBe(false); // Expect false because password is incorrect
   });

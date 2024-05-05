@@ -1,4 +1,4 @@
-// Using ES module syntax
+
 import { createCourse, getCourseById, updateCourse, deleteCourse, listCourses } from './courseService.mjs';
 import database from '../database.mjs';
 

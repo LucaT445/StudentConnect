@@ -1,11 +1,10 @@
 // courseService.mjs
 
-// Assuming you have a database module that handles the database operations
 import database from '../database.mjs';
 
 // Function to create a new course
 export const createCourse = async (courseData) => {
-    return database.add('courses', courseData); // Simplified
+    return database.add('courses', courseData); 
 };
 
 // Function to retrieve a course by ID
