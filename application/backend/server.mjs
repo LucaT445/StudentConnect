@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import axios from "axios";
 import { fileURLToPath } from "url";
-import { connectToDatabase, insertUsers } from "./database.mjs";
+import { database } from "./database.mjs"; 
 import User from "./models/User.mjs";
 import Class from "./models/Classes.mjs";
 import QAForms from "./models/QAForum.mjs";
@@ -18,7 +18,6 @@ const app = express();
 
 dotenv.config();
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("dev"));
@@ -28,46 +27,17 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const root = path.resolve(__dirname, "..", "build");
 app.use(express.static(root));
 
-connectToDatabase();
+// Use database instance to connect
+database.connectToDatabase();
 
-// AI tutor set up
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
-
-/*
-   Route for processing chat messages using the Gemini API
-*/
-app.post("/api/chat", async (req, res) => {
-  try {
-    // get user prompt from text field
-    const { prompt } = req.body;
-
-    // send prompt and wait for results
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    console.log(text);
-    res.status(200).json({ message: text });
-  } catch (err) {
-    console.error("API request failed with error: ", err);
-    res.status(500).json({
-      error: "Something went wrong",
-      details: err.message,
-    });
-  }
-});
-
-// post new user to databse during registration
+// Further uses of database
 app.post("/api/users", async (req, res) => {
   try {
     const userData = req.body;
-    await insertUsers(userData);
-
+    await database.insertUsers(userData);
     res.status(201).json({ message: "Users added successfully" });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Failed to add users", error: err.message });
+    res.status(500).json({ message: "Failed to add users", error: err.message });
   }
 });
 
